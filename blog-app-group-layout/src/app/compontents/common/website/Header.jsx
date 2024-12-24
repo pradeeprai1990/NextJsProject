@@ -1,6 +1,13 @@
-import React from 'react'
+"use client"
+import { createLogin } from '@/app/context/LoginContext'
+import Link from 'next/link'
+import React, { useContext } from 'react'
 
 export default function Header() {
+
+   let {login,setLogin}=useContext(createLogin)
+
+   console.log(login)
   return (
     <div className="w-full   mx-auto py-4  relative px-4  sm:sticky top-0 text-xl justify-between flex text-[white] bg-blue-600 ">
     <h1 className="text-[#45ce55] text-2xl ml-2 sm:ml-0 font-extrabold">Blog-<span className="text-[#ff4d00]">st</span></h1>
@@ -15,7 +22,12 @@ export default function Header() {
           <a href="/listing">
              <li className="hover:text-[#45ce55]  font-bold capitalize">listing</li>
           </a>
-          <li><a href="/user"><button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded shadow">Login</button></a></li>
+          {  login ?
+            <li><button onClick={()=>setLogin(null)} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded shadow">LogOut</button></li>
+            :
+            <li><Link href="/login"><button className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded shadow">Login</button></Link></li>
+          }
+          
        </ul>
     </div>
     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" className="sm:hidden cursor-pointer text-2xl block" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
